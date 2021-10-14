@@ -36,6 +36,7 @@ https://user-images.githubusercontent.com/83731627/128808266-c9f5824a-7c62-4b7e-
 ## Demo
 
 [Video Demonstration](https://watch.screencastify.com/v/xIzBKvIpzxaRJBhS0mQ5)
+[Sample Page](images/Screen Shot 2021-10-14 at 11.53.14 AM.png)
 
 
   
