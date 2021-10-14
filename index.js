@@ -22,7 +22,7 @@ const prompt = () => {
         {
             type: "list",
             name: "addNext",
-            message: "Welcome to the Team Profile Generator! What team member would you like to add first?",
+            message: "What team member would you like to add?",
             choices: ["Manager", "Engineer", "Intern", "None"],
         }
     ]).then((answers) => {
@@ -137,7 +137,7 @@ const createManagerCard = (answers) => {
     <div class="card col text-center" style="width: 18rem; margin: 10px;">
       <div class="card-header bg-warning">
         <h2 class="card-title">${manager.getRole()}</h5>
-        <h3 class="card-subtitle mb-2 text-muted">${manager.name}</h6>
+        <h3 class="card-subtitle mb-2">${manager.name}</h6>
         <div style="width: 100%;">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">ID: ${manager.id}</li>
@@ -156,7 +156,7 @@ const createEngineerCard = (answers) => {
     <div class="card col text-center" style="width: 18rem; margin: 10px;">
       <div class="card-header bg-info">
         <h2 class="card-title">${engineer.getRole()}</h5>
-        <h3 class="card-subtitle mb-2 text-muted">${engineer.name}</h6>
+        <h3 class="card-subtitle mb-2">${engineer.name}</h6>
         <div style="width: 100%;">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">ID: ${engineer.id}</li>
@@ -175,7 +175,7 @@ const createInternCard = (answers) => {
     <div class="card col text-center" style="width: 18rem; margin: 10px;">
       <div class="card-header bg-light">
         <h2 class="card-title">${intern.getRole()}</h5>
-        <h3 class="card-subtitle mb-2 text-muted">${intern.name}</h6>
+        <h3 class="card-subtitle mb-2">${intern.name}</h6>
         <div style="width: 100%;">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">ID: ${intern.id}</li>
