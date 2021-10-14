@@ -11,7 +11,7 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 
-//variables to be populated with HTML based on inquirer input
+//variables to be populated with HTML based on user input
 var managerCard = ``
 var engineerCard = ``
 var internCard = ``
@@ -43,7 +43,7 @@ const prompt = () => {
     })
 }
 
-
+//prompt user input based on role selected
 const addManager = () => {
     return inquirer.prompt([
         {
@@ -68,7 +68,7 @@ const addManager = () => {
         },
     ]).then((answers) => {
         prompt();
-        saveManager(answers)
+        createManagerCard(answers)
     })
 }
 
@@ -96,7 +96,7 @@ const addEngineer = () => {
         },
     ]).then((answers) => {
         prompt();
-        saveEngineer(answers)
+        createEngineerCard(answers)
     })
 }
 
@@ -125,20 +125,22 @@ const addIntern = () => {
         },
     ]).then((answers) => {
         prompt();
-        saveIntern(answers)
+        createInternCard(answers)
     })
 }
 
-const saveManager = (answers) => {
+
+//take user input and render it within HTML cards
+const createManagerCard = (answers) => {
     const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber)
     managerCard = `
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">${manager.name}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">${manager.getRole()}</h6>
+    <div class="card col text-center" style="width: 18rem; margin: 10px;">
+      <div class="card-header bg-warning">
+        <h2 class="card-title">${manager.getRole()}</h5>
+        <h3 class="card-subtitle mb-2 text-muted">${manager.name}</h6>
         <div style="width: 100%;">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">ID Number: ${manager.id}</li>
+        <li class="list-group-item">ID: ${manager.id}</li>
         <li class="list-group-item">Email: <a href="mailto:${manager.email}">${manager.email}</a></li>
         <li class="list-group-item">Office Number: ${manager.officeNumber}</li>
       </ul>
@@ -148,16 +150,16 @@ const saveManager = (answers) => {
         ` + managerCard;
 }
 
-const saveEngineer = (answers) => {
+const createEngineerCard = (answers) => {
     const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github)
     engineerCard = `
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">${engineer.name}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">${engineer.getRole()}</h6>
+    <div class="card col text-center" style="width: 18rem; margin: 10px;">
+      <div class="card-header bg-info">
+        <h2 class="card-title">${engineer.getRole()}</h5>
+        <h3 class="card-subtitle mb-2 text-muted">${engineer.name}</h6>
         <div style="width: 100%;">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">ID Number: ${engineer.id}</li>
+        <li class="list-group-item">ID: ${engineer.id}</li>
         <li class="list-group-item">Email: <a href="mailto:${engineer.email}">${engineer.email}</a></li>
         <li class="list-group-item">Github Username: ${engineer.github}</li>
       </ul>
@@ -167,16 +169,16 @@ const saveEngineer = (answers) => {
         ` + engineerCard;
 }
 
-const saveIntern = (answers) => {
+const createInternCard = (answers) => {
     const intern = new Intern(answers.name, answers.id, answers.email, answers.school)
     internCard = `
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">${intern.name}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">${intern.getRole()}</h6>
+    <div class="card col text-center" style="width: 18rem; margin: 10px;">
+      <div class="card-header bg-light">
+        <h2 class="card-title">${intern.getRole()}</h5>
+        <h3 class="card-subtitle mb-2 text-muted">${intern.name}</h6>
         <div style="width: 100%;">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">ID Number: ${intern.id}</li>
+        <li class="list-group-item">ID: ${intern.id}</li>
         <li class="list-group-item">Email: <a href="mailto:${intern.email}">${intern.email}</a></li>
         <li class="list-group-item">School: ${intern.school}</li>
       </ul>
@@ -186,6 +188,7 @@ const saveIntern = (answers) => {
         ` + internCard;
 }
 
+//put all of the HTML together
 const renderHTML = () =>
     `<!DOCTYPE html>
 <html lang="en">
@@ -194,24 +197,27 @@ const renderHTML = () =>
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="./style.css">
-  <title>Document</title>
+  <title>Team Profile</title>
 </head>
 <body>
   <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="text-center">Your Team:</h1>
+    </div>
+  </div>
+
   <div class="container">
-    <h1 class="display-4">Your Team:</h1>
-  </div>
-  </div>
-  <div class = "employee-section">
-  ${managerCard}
-  </div>
-  <div class = "employee-section">
-  ${engineerCard}
-  </div>
-  <div class = "employee-section">
-  ${internCard}
-  </div>
+    <div class="row row-cols-auto d-flex justify-content-center">     
+        ${managerCard}
+    </div>
+    <div class="row row-cols-auto d-flex justify-content-center"> 
+        ${engineerCard}
+    </div>
+    <div class="row row-cols-auto d-flex justify-content-center">
+        ${internCard}
+    </div>
 </body>
 </html>`;
 
+//initialize app
 prompt()
